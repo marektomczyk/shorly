@@ -5,6 +5,7 @@ import {
   HttpRedirectResponse,
   HttpStatus,
   Param,
+  Redirect,
 } from '@nestjs/common';
 import { LinksService } from 'src/services/links.service';
 
@@ -13,8 +14,9 @@ export class RedirectController {
   constructor(private readonly linksService: LinksService) {}
 
   @Get('/:id')
+  @Redirect()
   async redirect(@Param('id') id: string): Promise<HttpRedirectResponse> {
-    const link = this.linksService.getById(id);
+    const link = await this.linksService.getById(id);
     if (!link) {
       throw new HttpException('Link not found', HttpStatus.NOT_FOUND);
     }

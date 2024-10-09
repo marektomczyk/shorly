@@ -14,7 +14,7 @@ export class LinksController {
   }
 
   @Get()
-  async getLinks(): Promise<Array<Link>> {
+  async getLinks(): Promise<Link[]> {
     return this.linksService.getAll();
   }
 }
